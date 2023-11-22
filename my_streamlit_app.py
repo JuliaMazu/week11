@@ -53,6 +53,6 @@ viz_heat = sns.heatmap(df[df['continent']==diction[continent]][['mpg', 'cylinder
 st.pyplot(viz_heat.figure)
 
 
-image = Image.open(r"C:\Users\wilder\Documents\iCDpNj.jpg")
+image = Image.open(r"https://wallpapercave.com/wp/4OTQErU.jpg")
 st.image(image, caption='Nice ride')
 
