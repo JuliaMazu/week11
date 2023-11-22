@@ -9,7 +9,7 @@ st.title('Hello Wilders, welcome to my application!')
 
 st.write("I want to show you some car statistique")
 
-df = pd.read_csv('https://raw.githubusercontent.com/murpi/wilddata/master/quests/cars.csv')
+df = pd.read_csv('C:\\Users\\wilder\\Downloads\\cars.csv')
 
 #Button and limit by year
 
@@ -53,6 +53,6 @@ viz_heat = sns.heatmap(df[df['continent']==diction[continent]][['mpg', 'cylinder
 st.pyplot(viz_heat.figure)
 
 
-image = Image.open(r"https://wallpapercave.com/wp/4OTQErU.jpg")
-st.image(image, caption='Nice ride')
+#image = Image.open(r"C:\Users\wilder\Documents\iCDpNj.jpg")
+st.image('https://wallpapercave.com/wp/4OTQErU.jpg', caption='Nice ride')
 
