@@ -1,21 +1,59 @@
 import streamlit as st
+import pandas as pd 
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 st.title('Hello Wilders, welcome to my application!')
 
-st.write("I enjoy to discover stremalit possibilities")
+st.write("I want to show you some car statistique")
 
-st.title('Hello Wilders, welcome to my application!')
+df = pd.read_csv('https://raw.githubusercontent.com/murpi/wilddata/master/quests/cars.csv')
 
-name = st.text_input("Please give me your name:")
-name_length = len(name)
-st.write("Your name has ",name_length, "characters")
+#Button and limit by year
+
+if 'clicked' not in st.session_state:
+    st.session_state.clicked = False
+
+def click_button():
+    st.session_state.clicked = True
+
+st.header("Correlation between car characteristics")
+st.button('Limit by the year', on_click=click_button)
+if st.session_state.clicked:
+    st.write('Between following values')
+    year = st.slider('Select a value', min_value=1971, max_value=1983) 
+    
+if st.session_state.clicked == False:
+    viz_pair = sns.pairplot(df[['mpg', 'hp', 'cylinders', 'weightlbs']], palette='PiYG')
+else:
+	viz_pair = sns.pairplot(df[df['year']==year][['mpg', 'hp', 'cylinders', 'weightlbs']], palette='PiYG')
+st.pyplot(viz_pair.figure)
+
+
+st.header("Correlation between weight of car and mpg")
+viz1 = sns.jointplot(df, x = 'weightlbs', y = 'mpg', hue = 'continent', palette='PiYG')
+st.pyplot(viz1.figure)
+#st.header("Correlation between weight of car and cubicinches")
+#viz2  = sns.jointplot(df, x = 'weightlbs', y = 'cubicinches', hue = 'continent')
+#st.pyplot(viz2.figure)
+
+#slide to chose the continent
+continent = st.selectbox(
+    'Which continent would you like to verify?',
+    ('US', 'Europe', 'Japan'))
+
+diction = {'US' : ' US.',
+           'Europe' : ' Europe.', 
+        	'Japan' : ' Japan.'}
+
+viz_heat = sns.heatmap(df[df['continent']==diction[continent]][['mpg', 'cylinders', 'cubicinches', 'hp', 'weightlbs', 'time-to-60']].corr(),
+            annot=True,
+            annot_kws={'fontsize':8},
+            cmap = 'PiYG',
+            center=0, label = False
+            )
+st.pyplot(viz_heat.figure)
 
 
 
 
-#viz_correlation = sns.heatmap(df_weather.corr(), 
-								#center=0,
-								#cmap = sns.color_palette("vlag", as_cmap=True)
-								#)
-
-#st.pyplot(viz_correlation.figure)
