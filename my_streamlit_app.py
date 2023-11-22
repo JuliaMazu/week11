@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd 
 import seaborn as sns
 import matplotlib.pyplot as plt
-from PIL import Image
 
 
 st.title('Hello Wilders, welcome to my application!')
@@ -53,6 +52,5 @@ viz_heat = sns.heatmap(df[df['continent']==diction[continent]][['mpg', 'cylinder
 st.pyplot(viz_heat.figure)
 
 
-#image = Image.open(r"C:\Users\wilder\Documents\iCDpNj.jpg")
 st.image('https://wallpapercave.com/wp/4OTQErU.jpg', caption='Nice ride')
 
