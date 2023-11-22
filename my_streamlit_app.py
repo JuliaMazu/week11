@@ -9,7 +9,7 @@ st.title('Hello Wilders, welcome to my application!')
 
 st.write("I want to show you some car statistique")
 
-df = pd.read_csv('C:\\Users\\wilder\\Downloads\\cars.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/murpi/wilddata/master/quests/cars.csv')
 
 #Button and limit by year
 
