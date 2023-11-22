@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd 
 import seaborn as sns
 import matplotlib.pyplot as plt
+from PIL import Image
+
 
 st.title('Hello Wilders, welcome to my application!')
 
@@ -24,20 +26,16 @@ if st.session_state.clicked:
     year = st.slider('Select a value', min_value=1971, max_value=1983) 
     
 if st.session_state.clicked == False:
-    viz_pair = sns.pairplot(df[['mpg', 'hp', 'cylinders', 'weightlbs']], palette='PiYG')
+    viz_pair = sns.pairplot(df[['mpg', 'hp', 'cylinders', 'weightlbs']])
 else:
-	viz_pair = sns.pairplot(df[df['year']==year][['mpg', 'hp', 'cylinders', 'weightlbs']], palette='PiYG')
+	viz_pair = sns.pairplot(df[df['year']==year][['mpg', 'hp', 'cylinders', 'weightlbs']])
 st.pyplot(viz_pair.figure)
 
 
 st.header("Correlation between weight of car and mpg")
 viz1 = sns.jointplot(df, x = 'weightlbs', y = 'mpg', hue = 'continent', palette='PiYG')
 st.pyplot(viz1.figure)
-#st.header("Correlation between weight of car and cubicinches")
-#viz2  = sns.jointplot(df, x = 'weightlbs', y = 'cubicinches', hue = 'continent')
-#st.pyplot(viz2.figure)
 
-#slide to chose the continent
 continent = st.selectbox(
     'Which continent would you like to verify?',
     ('US', 'Europe', 'Japan'))
@@ -55,5 +53,6 @@ viz_heat = sns.heatmap(df[df['continent']==diction[continent]][['mpg', 'cylinder
 st.pyplot(viz_heat.figure)
 
 
-
+image = Image.open(r"C:\Users\wilder\Documents\iCDpNj.jpg")
+st.image(image, caption='Nice ride')
 
